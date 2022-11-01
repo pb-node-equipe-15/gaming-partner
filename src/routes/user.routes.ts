@@ -1,11 +1,11 @@
-import { Router } from "express"
+import { Router } from "express";
 
-const userRouter = Router()
+const userRouter = Router();
 
-userRouter.post('', )
-userRouter.get('', )
-userRouter.patch('/:id', )
-userRouter.delete('/:id', )
-userRouter.get('/:id/games', )
+userRouter.post("");
+userRouter.get("");
+userRouter.patch("/:id");
+userRouter.delete("/:id");
+userRouter.get("/:id/games");
 
-export default userRouter
+export default userRouter;

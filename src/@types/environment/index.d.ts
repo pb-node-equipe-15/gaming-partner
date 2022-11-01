@@ -1,8 +1,8 @@
-declare global{
-    namespace NodeJS{
-        interface ProcessEnv{
-            PGPORT: number | undefined
-        }
-    }    
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      PGPORT: number | undefined;
+    }
+  }
 }
-export {}
+export {};
