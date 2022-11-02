@@ -12,8 +12,8 @@ const createUserService = async ({
 }: IUserCreate): Promise<Users> => {
   const usersRepository = AppDataSource.getRepository(Users);
 
-  if (!password) {
-    throw new AppError("Password is missing", 400);
+  if (!password || !email || !name || !isAdm) {
+    throw new AppError("All the fields are required", 400);
   }
 
   const hashedPassword = await hash(password, 10);
