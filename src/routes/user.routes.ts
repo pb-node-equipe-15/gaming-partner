@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { createUserController } from "../controllers/users.controller";
 
 const userRouter = Router();
 
-userRouter.post("", createUserController);
+userRouter.post("");
 userRouter.get("");
 userRouter.patch("/:id");
 userRouter.delete("/:id");
