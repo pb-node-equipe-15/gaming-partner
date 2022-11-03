@@ -1,6 +1,7 @@
 import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
 import { IUserCreate } from "../interfaces";
+import addGamesUserService from "../services/users/addGamesUser.service";
 
 import createUserService from "../services/users/createUser.service";
 import deleteUserService from "../services/users/deleteUser.service";
@@ -30,5 +31,14 @@ const listUserController = async (req: Request, res: Response) => {
     return res.status(200).json({users})
 }
 
-export  {createUserController, deleteUserController,listUserController, searchUserController} ;
+const addGamesUser = async (req: Request, res: Response) => {
+    const id : string = req.params.id
+    console.log("id user " + id)
+    const idGame: string = req.body.games
+    console.log("id game " + idGame)
+    const user = addGamesUserService(idGame, id)
+    return res.status(200).json({ user })
+}
+
+export  {createUserController, deleteUserController,listUserController, searchUserController, addGamesUser} ;
 
