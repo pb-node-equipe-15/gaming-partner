@@ -1,9 +1,8 @@
 import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
 import { IUserCreate } from "../interfaces";
-import createUserService from "../services/users/createUser.service";
 
-import AppError from "../errors/AppError";
+import createUserService from "../services/users/createUser.service";
 import deleteUserService from "../services/users/deleteUser.service";
 
 const createUserController = async (req: Request, res: Response) => {
@@ -13,9 +12,9 @@ const createUserController = async (req: Request, res: Response) => {
 };
 
 const deleteUserController = async (req: Request, res: Response) => {
-    const id:string = req.params.id;
+    const id: string = req.params.id;
     await deleteUserService(id);
-    return res.status(204).json({ message: 'User deleted with success!' });
+    return res.status(200).json({ message: 'User deleted with success!' });
 };
 
 export  {createUserController, deleteUserController} ;

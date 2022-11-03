@@ -1,4 +1,4 @@
-import bcrypt, { compare } from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import { IUserLogin } from '../../interfaces';
