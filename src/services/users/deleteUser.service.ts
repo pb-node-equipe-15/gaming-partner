@@ -1,8 +1,8 @@
-import Users from "../entities/users.entities";
-import AppDataSource from "../data-source";
-import AppError from "../errors/AppError";
+import Users from "../../entities/users.entities";
+import AppDataSource from "../../data-source";
+import AppError from "../../errors/AppError";
 
-const deleteUserService = async (id: string) => {
+const deleteUserService = async (id: string): Promise<void> => {
   const userRepository = AppDataSource.getRepository(Users);
 
   const user = await userRepository.findOneBy({ id });
@@ -15,9 +15,7 @@ const deleteUserService = async (id: string) => {
     throw new AppError("User inactive", 400);
   }
 
-  await userRepository.update({ id }, { isActive: false });
-
-  return true;
+  await userRepository.update({ id }, { isActive: false });  
 };
 
 export default deleteUserService;
