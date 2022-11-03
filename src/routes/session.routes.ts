@@ -2,6 +2,6 @@ import { Router } from "express";
 
 const sessionRouter = Router();
 
-sessionRouter.post("");
+sessionRouter.post("", );
 
 export default sessionRouter;
