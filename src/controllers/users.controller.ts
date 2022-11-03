@@ -12,9 +12,9 @@ const createUserController = async (req: Request, res: Response) => {
 };
 
 const deleteUserController = async (req: Request, res: Response) => {
-    const id:string = req.params.id;
+    const id: string = req.params.id;
     await deleteUserService(id);
-    return res.status(204).json({ message: 'User deleted with success!' });
+    return res.status(200).json({ message: 'User deleted with success!' });
 };
 
 export  {createUserController, deleteUserController} ;

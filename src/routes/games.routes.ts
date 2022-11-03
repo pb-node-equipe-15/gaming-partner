@@ -7,8 +7,8 @@ const gamesRouter = Router();
 
 gamesRouter.post("", authMiddleware, adminMiddleware, createGameController);
 gamesRouter.get("", authMiddleware, listGamesController);
-gamesRouter.patch("/:idGame");
-gamesRouter.delete("/:idGame", authMiddleware, adminMiddleware, deleteGameController);
+gamesRouter.patch("/:id");
+gamesRouter.delete("/:id", authMiddleware, adminMiddleware, deleteGameController);
 gamesRouter.get("/:id/games");
 
 export default gamesRouter;
