@@ -5,14 +5,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-  ManyToOne
-} from 'typeorm';
-import Categories from './categories.entities';
-import usersGames from './usersGames.entities';
+  ManyToOne,
+} from "typeorm";
+import Categories from "./categories.entities";
+import usersGames from "./usersGames.entities";
 
-@Entity('Games')
+@Entity("Games")
 class Games {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
   @Column({ length: 255 })
@@ -27,11 +27,11 @@ class Games {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany(() => usersGames, usersGames => usersGames.user)
+  @OneToMany(() => usersGames, (usersGames) => usersGames.user)
   users_games: usersGames[];
 
   @ManyToOne(() => Categories)
-  categories: Categories
+  categories: Categories;
 }
 
-export default Games ;
+export default Games;
