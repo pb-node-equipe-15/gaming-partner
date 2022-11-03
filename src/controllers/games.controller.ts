@@ -1,5 +1,6 @@
 import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
+
 import { IGamerCreate } from "../interfaces";
 import createGameService from "../services/Games/createGames.service";
 import deleteGameService from "../services/Games/deleteGame.service";
@@ -14,7 +15,7 @@ const createGameController = async (req: Request, res: Response) => {
 const listGamesController = async (req: Request, res: Response) => {
     const games = await listGamesService();
     return res.json(instanceToPlain(games));
-};
+}; 
 
 const deleteGameController = async (req: Request, res: Response) => {
     const id: string = req.params.id;
