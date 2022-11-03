@@ -4,12 +4,7 @@ import Users from "../../entities/users.entities";
 import AppDataSource from "../../data-source";
 import AppError from "../../errors/AppError";
 
-const createUserService = async ({
-  name,
-  email,
-  isAdm,
-  password,
-}: IUserCreate): Promise<Users> => {
+const createUserService = async ({ name, email, isAdm, password,}: IUserCreate): Promise<Users> => {
   const usersRepository = AppDataSource.getRepository(Users);
 
   if (!password || !email || !name || !isAdm) {

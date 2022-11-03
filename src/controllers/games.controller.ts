@@ -27,20 +27,9 @@ const listGamesController = async (req: Request, res: Response) => {
 };
 
 const deleteGameController = async (req: Request, res: Response) => {
-  try {
     const id = req.params.id;
-
     const game = await deleteGameService(id);
-
     return res.status(200).send(game);
-  } catch (err) {
-    if (err instanceof Error) {
-      return res.status(404).send({
-        error: err.name,
-        message: err.message,
-      });
-    }
-  }
 };
 
 export { createGameController, listGamesController, deleteGameController };
