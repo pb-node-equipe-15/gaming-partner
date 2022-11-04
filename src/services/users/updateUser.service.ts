@@ -4,16 +4,10 @@ import { IUserUpdateRequest } from "../../interfaces";
 import { hash } from "bcryptjs";
 import AppError from "../../errors/AppError";
 
-const updateUserService = async (
-  { name, email, password }: IUserUpdateRequest,
-  id: string,
-  tokenId: string
-): Promise<Users | Array<string | number>> => {
+const updateUserService = async ({ name, email, password }: IUserUpdateRequest, id: string, tokenId: string): Promise<Users | Array<string | number>> => {
   const usersRepository = AppDataSource.getRepository(Users);
 
-  const findUser = await usersRepository.findOneBy({
-    id,
-  });
+  const findUser = await usersRepository.findOneBy({ id });
 
   if (!findUser) {
     throw new AppError("User not found", 404);
@@ -29,9 +23,7 @@ const updateUserService = async (
     password: password ? await hash(password, 10) : findUser.password,
   });
 
-  const user = await usersRepository.findOneBy({
-    id,
-  });
+  const user = await usersRepository.findOneBy({ id });
 
   return user!;
 };

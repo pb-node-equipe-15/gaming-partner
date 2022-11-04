@@ -1,7 +1,7 @@
 import { Exclude } from "class-transformer";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import Conections from "./conections.entities";
-import usersGames from "./usersGames.entities";
+import UsersGames from "./usersGames.entities";
 
 
 @Entity('users')
@@ -34,8 +34,8 @@ class Users{
     @UpdateDateColumn()
     updateAt: Date
 
-    @OneToMany(() => usersGames, usersGames => usersGames.games)
-    games: usersGames[]
+    @OneToMany(() => UsersGames, usersGames => usersGames.users)    
+    games: UsersGames[]
 
     @OneToMany(() => Conections, conections => conections.user)
     user: Conections[]

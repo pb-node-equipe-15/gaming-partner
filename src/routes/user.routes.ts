@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import {
+    addGamesUser,
   createUserController,
   deleteUserController,
   listUserController,
@@ -13,15 +14,11 @@ import { authMiddleware } from "../middlewares/auth.midleware";
 const userRouter = Router();
 
 userRouter.post("", createUserController);
+userRouter.post("/add", authMiddleware, addGamesUser);
 userRouter.get("", authMiddleware, listUserController);
 userRouter.get("/:id", authMiddleware, searchUserController);
-userRouter.patch("/:id", authMiddleware, updateUserController);
-userRouter.delete(
-  "/:id",
-  authMiddleware,
-  adminMiddleware,
-  deleteUserController
-);
 userRouter.get("/:id/games");
+userRouter.patch("/:id", authMiddleware, updateUserController);
+userRouter.delete("/:id", authMiddleware, adminMiddleware, deleteUserController);
 
 export default userRouter;

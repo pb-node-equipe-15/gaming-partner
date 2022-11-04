@@ -4,15 +4,15 @@ import Users from "./users.entities";
 
 
 @Entity('users_games')
-class usersGames{
+class UsersGames{
     @PrimaryGeneratedColumn('uuid')
     readonly id: string
 
     @ManyToOne(() => Users)
-    user: Users
+    users: Users
 
     @ManyToOne(() => Games)
     games: Games
 }
 
-export default usersGames
+export default UsersGames
