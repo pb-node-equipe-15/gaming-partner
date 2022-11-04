@@ -10,7 +10,7 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "test": "cross-env NODE_ENV=test jest",
     "build": "tsc",
-    "start": "node dist/src/serve.js"    
+    "start": "node dist/src/server.js"    
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
