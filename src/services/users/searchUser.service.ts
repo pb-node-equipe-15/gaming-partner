@@ -4,7 +4,7 @@ import AppError from "../../errors/AppError";
 
 const searchUserService = async (id: string): Promise<Users> => {
     const usersRepository =  AppDataSource.getRepository(Users)
-    const user = await usersRepository.findOneBy({ id: id})
+    const user = await usersRepository.findOneBy({ id })
 
     if(!user){
         throw new AppError("User not found", 400)
