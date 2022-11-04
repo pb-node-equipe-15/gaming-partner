@@ -1,31 +1,27 @@
 import AppDataSource from "../../data-source"
 import Games from "../../entities/games.intities"
 import Users from "../../entities/users.entities"
-import usersGames from "../../entities/usersGames.entities"
+import UsersGames from "../../entities/usersGames.entities"
 import AppError from "../../errors/AppError"
 
-const addGamesUserService =async (IdGames: string, id: string): Promise<Users> => {
+const addGamesUserService =async (IdGames: string, idUser: string): Promise<void> => {
     const userRepository = AppDataSource.getRepository(Users)
     const gamesRepository = AppDataSource.getRepository(Games)
-    const userGame = AppDataSource.getRepository(usersGames)
+    const userGameRepository = AppDataSource.getRepository(UsersGames)
 
-    const findUser = await userRepository.findOneBy({id})
-    const SearchGame = await gamesRepository.findOneBy({id: IdGames})
+    const users = await userRepository.findOneBy({id: idUser})
+    const games = await gamesRepository.findOneBy({id: IdGames})   
     
-    if(!findUser){
-        throw new AppError("User not found", 400)
-    }
-    if(!SearchGame){
+    if(!games || !users){
         throw new AppError("Game not found", 400)        
     }
 
-    await userGame.update(id,{
-        user: findUser,
-        games: SearchGame
-    })
-        
-    const user = await userRepository.findOneBy({id})    
-    return user!
+    await userGameRepository.save({
+        users,
+        games
+    })        
+    /* const user = await userRepository.findOneBy({id})    
+    return user! */    
 }
 
 export default addGamesUserService

@@ -10,7 +10,7 @@ userRouter.post("", createUserController);
 userRouter.get("", authMiddleware, listUserController);
 userRouter.get("/:id", authMiddleware, searchUserController);
 userRouter.patch("/:id");
-userRouter.patch("/add/:id", authMiddleware, adminMiddleware, addGamesUser);
+userRouter.post("/add", authMiddleware, addGamesUser);
 userRouter.delete("/:id", authMiddleware, adminMiddleware, deleteUserController);
 userRouter.get("/:id/games");
 
