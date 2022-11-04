@@ -5,6 +5,12 @@ export interface IUserCreate {
   password: string;
 }
 
+export interface IUserUpdateRequest {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export interface IUserLogin {
   email: string;
   password: string;

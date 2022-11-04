@@ -1,20 +1,15 @@
-import Games from "../../entities/games.intities";
-import { IUpdateGame } from "../../interfaces";
-import AppDataSource from "../../data-source";
-import AppError from "../../errors/AppError";
+import Games from '../../entities/games.intities';
+import { IUpdateGame } from '../../interfaces';
+import AppDataSource from '../../data-source';
+import AppError from '../../errors/AppError';
 
-const updateGameService = async (
-  { name, description }: IUpdateGame,
-  id: string
-): Promise<Games> => {
+const updateGameService = async ({ name, description }: IUpdateGame, id: string): Promise<Games> => {
   const gamesRepository = AppDataSource.getRepository(Games);
 
-  const findGame = await gamesRepository.findOneBy({
-    id,
-  });
+  const findGame = await gamesRepository.findOneBy({ id });
 
   if (!findGame) {
-    throw new AppError("Game not found", 404);
+    throw new AppError('Game not found', 404);
   }
 
   await gamesRepository.update(id, {
