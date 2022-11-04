@@ -15,6 +15,11 @@ export interface IGamerCreate {
   description: string;
 }
 
+export interface IUpdateGame {
+  name?: string;
+  description?: string;
+}
+
 export interface ICategoryCreate {
   name: string;
 }
