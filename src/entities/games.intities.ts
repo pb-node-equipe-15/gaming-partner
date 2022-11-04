@@ -6,13 +6,14 @@ import {
   UpdateDateColumn,
   OneToMany,
   ManyToOne,
-} from "typeorm";
-import Categories from "./categories.entities";
-import UsersGames from "./usersGames.entities";
+} from 'typeorm';
 
-@Entity("Games")
+import Categories from './categories.entities';
+import UsersGames from './usersGames.entities';
+
+@Entity('Games')
 class Games {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   readonly id: string;
 
   @Column({ length: 255 })

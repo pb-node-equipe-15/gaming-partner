@@ -1,8 +1,9 @@
-import AppDataSource from "../../data-source";
-import Users from "../../entities/users.entities";
-import { IUserUpdateRequest } from "../../interfaces";
-import { hash } from "bcryptjs";
-import AppError from "../../errors/AppError";
+import { hash } from 'bcryptjs';
+
+import AppDataSource from '../../data-source';
+import Users from '../../entities/users.entities';
+import { IUserUpdateRequest } from '../../interfaces';
+import AppError from '../../errors/AppError';
 
 const updateUserService = async ({ name, email, password }: IUserUpdateRequest, id: string, tokenId: string): Promise<Users | Array<string | number>> => {
   const usersRepository = AppDataSource.getRepository(Users);
@@ -10,11 +11,11 @@ const updateUserService = async ({ name, email, password }: IUserUpdateRequest, 
   const findUser = await usersRepository.findOneBy({ id });
 
   if (!findUser) {
-    throw new AppError("User not found", 404);
+    throw new AppError('User not found', 404);
   }
 
   if (id !== tokenId) {
-    throw new AppError("Unauthorized access", 401);
+    throw new AppError('Unauthorized access', 401);
   }
 
   await usersRepository.update(id, {

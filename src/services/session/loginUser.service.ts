@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
+
 import { IUserLogin } from '../../interfaces';
 import Users from '../../entities/users.entities';
 import AppDataSource from '../../data-source';
@@ -8,8 +9,7 @@ import AppError from '../../errors/AppError';
 
 const createSessionService = async ({ email, password,}: IUserLogin): Promise<string> => {
   const userRepository = AppDataSource.getRepository(Users);
-
-  const user = await userRepository.findOneBy({email: email});
+  const user = await userRepository.findOneBy({ email: email });
 
   if (!user) {
     throw new AppError('Invalid email or password', 403);

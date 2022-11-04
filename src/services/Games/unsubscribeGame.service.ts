@@ -1,12 +1,9 @@
-import AppDataSource from "../../data-source";
-import Games from "../../entities/games.intities";
-import Users from "../../entities/users.entities";
-import AppError from "../../errors/AppError";
+import AppDataSource from '../../data-source';
+import Games from '../../entities/games.intities';
+import Users from '../../entities/users.entities';
+import AppError from '../../errors/AppError';
 
-const unsubscribeGameService = async (
-  id: string,
-  idUser: string
-): Promise<Games> => {
+const unsubscribeGameService = async ( id: string, idUser: string): Promise<void> => {
   const gamesRepository = AppDataSource.getRepository(Games);
   const game = await gamesRepository.findOneBy({ id });
 
@@ -14,20 +11,18 @@ const unsubscribeGameService = async (
   const user = await usersRepository.findOneBy({ id: idUser });
 
   if (!game) {
-    throw new AppError("game not found", 400);
+    throw new AppError('game not found', 400);
   }
 
-  const valid = game.users_games.find((element) => element.user === user);
+  const valid = game.usersGames.find((element) => element.users === user);
 
   if (!valid) {
-    throw new AppError("User inscription was not found in this game", 400);
+    throw new AppError('User inscription was not found in this game', 400);
   }
 
-  game.users_games.filter((element) => element.user !== user);
+  game.usersGames.filter((element) => element.users !== user);
 
   await gamesRepository.save(game);
-
-  return game;
 };
 
 export default unsubscribeGameService;
