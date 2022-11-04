@@ -9,4 +9,4 @@ const createUserController = async (req: Request, res: Response) => {
   return res.status(201).json(instanceToPlain(createdUser));
 };
 
-export  {createUserController} ;
+export { createUserController };

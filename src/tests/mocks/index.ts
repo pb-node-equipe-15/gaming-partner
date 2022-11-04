@@ -1,9 +1,31 @@
-import { ICategoryCreate, IGamerCreate, IUserCreate } from "../../interfaces";
+import {
+  ICategoryCreate,
+  IGamerCreate,
+  IUserCreate,
+  IUserLogin,
+} from "../../interfaces";
 
 export const mockedUser: IUserCreate = {
   name: "Patrick",
   email: "pk@mail.com",
   isAdm: true,
+  password: "1234",
+};
+
+export const mockedNotAdmUser: IUserCreate = {
+  name: "Henrique",
+  email: "henri@mail.com",
+  isAdm: false,
+  password: "1234",
+};
+
+export const mockedAdmLogin: IUserLogin = {
+  email: "pk@mail.com",
+  password: "1234",
+};
+
+export const mockedNotAdmLogin: IUserLogin = {
+  email: "henri@mail.com",
   password: "1234",
 };
 
