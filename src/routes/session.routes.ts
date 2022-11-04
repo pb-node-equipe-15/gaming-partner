@@ -1,7 +1,9 @@
-import { Router } from "express";
+import { Router } from 'express';
+
+import { createSessionController } from '../controllers/session.controller';
 
 const sessionRouter = Router();
 
-sessionRouter.post("");
+sessionRouter.post('', createSessionController);
 
 export default sessionRouter;

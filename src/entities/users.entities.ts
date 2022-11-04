@@ -1,44 +1,51 @@
-import { Exclude } from "class-transformer";
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import Conections from "./conections.entities";
-import usersGames from "./usersGames.entities";
+import { Exclude } from 'class-transformer';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
+import Conections from './conections.entities';
+import UsersGames from './usersGames.entities';
 
 @Entity('users')
-class Users{
-    @PrimaryGeneratedColumn('uuid')
-    readonly id: string
+class Users {
+  @PrimaryGeneratedColumn('uuid')
+  readonly id: string;
 
-    @Column({ length:255 })
-    name: string
+  @Column({ length: 255 })
+  name: string;
 
-    @Column({ length:255 })
-    email: string
+  @Column({ length: 255 })
+  email: string;
 
-    @Column({ length:255 })
-    @Exclude()
-    password: string
+  @Column({ length: 255 })
+  @Exclude()
+  password: string;
 
-    @Column({ default: false})
-    isAdm: boolean
+  @Column({ default: false })
+  isAdm: boolean;
 
-    @Column({ default: true})
-    isActive: boolean
+  @Column({ default: true })
+  isActive: boolean;
 
-    @Column({ default: false})
-    availability: boolean
+  @Column({ default: false })
+  availability: boolean;
 
-    @CreateDateColumn()
-    createdAt: Date
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updateAt: Date
+  @UpdateDateColumn()
+  updateAt: Date;
 
-    @OneToMany(() => usersGames, usersGames => usersGames.games)
-    games: usersGames[]
+  @OneToMany(() => UsersGames, (usersGames) => usersGames.users)
+  games: UsersGames[];
 
-    @OneToMany(() => Conections, conections => conections.user)
-    user: Conections[]
+  @OneToMany(() => Conections, (conections) => conections.user)
+  user: Conections[];
 }
 
-export default Users
+export default Users;

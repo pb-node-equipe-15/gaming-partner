@@ -1,18 +1,18 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import Games from "./games.intities";
-import Users from "./users.entities";
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
+import Games from './games.intities';
+import Users from './users.entities';
 
 @Entity('users_games')
-class usersGames{
-    @PrimaryGeneratedColumn('uuid')
-    readonly id: string
+class UsersGames {
+  @PrimaryGeneratedColumn('uuid')
+  readonly id: string;
 
-    @ManyToOne(() => Users)
-    user: Users
+  @ManyToOne(() => Users)
+  users: Users;
 
-    @ManyToOne(() => Games)
-    games: Games
+  @ManyToOne(() => Games)
+  games: Games;
 }
 
-export default usersGames
+export default UsersGames;
