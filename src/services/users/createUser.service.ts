@@ -14,8 +14,8 @@ const createUserService = async ({
   const findUser = await usersRepository.find();
   const emailAlreadyExists = findUser.find((user) => user.email === email);
 
-  if (!password || !email || !name || !isAdm) {
-    throw new AppError("All the fields are required");
+  if (!password || !email || !name || isAdm === undefined) {
+    throw new AppError("All the fields are required", 400);
   }
 
   if (emailAlreadyExists) {

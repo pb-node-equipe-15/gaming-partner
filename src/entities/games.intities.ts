@@ -5,10 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-  ManyToOne
+  ManyToOne,
 } from 'typeorm';
+
 import Categories from './categories.entities';
-import usersGames from './usersGames.entities';
+import UsersGames from './usersGames.entities';
 
 @Entity('Games')
 class Games {
@@ -27,11 +28,11 @@ class Games {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany(() => usersGames, usersGames => usersGames.user)
-  users_games: usersGames[];
+  @OneToMany(() => UsersGames, (usersGames) => usersGames.games)
+  usersGames: UsersGames[];
 
   @ManyToOne(() => Categories)
-  categories: Categories
+  categories: Categories;
 }
 
-export default Games ;
+export default Games;

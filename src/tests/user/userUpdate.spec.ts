@@ -7,6 +7,8 @@ import {
   mockedNotAdmLogin,
   mockedNotAdmUser,
   mockedUser,
+  mockedUserUpdate,
+  mockedUserUpdateLogin,
 } from "../mocks";
 
 describe("Update users", () => {
@@ -24,8 +26,9 @@ describe("Update users", () => {
     await connection.destroy();
   });
 
-  test("UPDATE /users/:id -> Não deve ser capaz de atualizar o usuário, se não for administrador", async () => {
-    const user = await request(app).post("/users").send(mockedNotAdmUser);
+  test("PATCH /users/:id -> Não deve ser capaz de atualizar o usuário, se não for o proprietário", async () => {
+    const user = await request(app).post("/users").send(mockedUser);
+    await request(app).post("/users").send(mockedNotAdmUser);
     const userLogin = await request(app).post("/login").send(mockedNotAdmLogin);
 
     const result = await request(app)
@@ -37,17 +40,26 @@ describe("Update users", () => {
     expect(result.body).toHaveProperty("message");
   });
 
-  test("UPDATE /users/:id -> Deve ser capaz de atualizar o usuário", async () => {
-    await request(app).post("/users").send(mockedUser);
-    const userNotAdm = await request(app).post("/users").send(mockedNotAdmUser);
-    const userLogin = await request(app).post("/login").send(mockedAdmLogin);
+  test("PATCH /users/:id -> Deve ser capaz de atualizar o usuário", async () => {
+    const user = await request(app).post("/users").send(mockedUserUpdate);
+    const userLogin = await request(app)
+      .post("/login")
+      .send(mockedUserUpdateLogin);
 
     const result = await request(app)
-      .patch(`/users/${userNotAdm.body.id}`)
-      .send({ name: "Henrique Santos" })
+      .patch(`/users/${user.body.id}`)
+      .send({ name: "Ketly Lavinia" })
       .set("Authorization", `Bearer ${userLogin.body.token}`);
 
     expect(result.status).toBe(201);
-    expect(result.body).toHaveProperty("message");
+    expect(result.body).toHaveProperty("id");
+    expect(result.body).toHaveProperty("name");
+    expect(result.body).toHaveProperty("email");
+    expect(result.body).toHaveProperty("isAdm");
+    expect(result.body).toHaveProperty("isActive");
+    expect(result.body).toHaveProperty("availability");
+    expect(result.body).toHaveProperty("createdAt");
+    expect(result.body).toHaveProperty("updateAt");
+    expect(result.body).not.toHaveProperty("password");
   });
 });

@@ -4,12 +4,13 @@ import app from "../../app";
 import AppDataSource from "../../data-source";
 import {
   mockedAdmLogin,
+  mockedGamer,
   mockedNotAdmLogin,
   mockedNotAdmUser,
   mockedUser,
 } from "../mocks";
 
-describe("List all users", () => {
+describe("List all games", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
@@ -18,33 +19,28 @@ describe("List all users", () => {
       .catch((err) => {
         console.error(err);
       });
+
+    await request(app).post("/users").send(mockedNotAdmUser);
+    await request(app).post("/users").send(mockedUser);
+    const userLogin = await request(app).post("/login").send(mockedAdmLogin);
+    await request(app)
+      .post("/games")
+      .send(mockedGamer)
+      .set("Authorization", `Bearer ${userLogin.body.token}`);
   });
 
   afterAll(async () => {
     await connection.destroy();
   });
 
-  test("GET /users -> Deve listar todos os usuários", async () => {
-    await request(app).post("/users").send(mockedUser);
-    const userLogin = await request(app).post("/login").send(mockedAdmLogin);
-
-    const userList = await request(app)
-      .get("/users")
-      .set("Authorization", `Bearer ${userLogin.body.token}`);
-
-    expect(userList.status).toBe(200);
-    expect(userList.body).toHaveLength(1);
-  });
-
-  test("GET /users -> Não deve ser capaz de listar os usuários, se não for administrador", async () => {
-    await request(app).post("/users").send(mockedNotAdmUser);
+  test("GET /games -> Deve listar todos os games", async () => {
     const userLogin = await request(app).post("/login").send(mockedNotAdmLogin);
 
-    const userList = await request(app)
-      .get("/users")
+    const gamesList = await request(app)
+      .get("/games")
       .set("Authorization", `Bearer ${userLogin.body.token}`);
 
-    expect(userList.status).toBe(403);
-    expect(userList.body).toHaveProperty("message");
+    expect(gamesList.status).toBe(200);
+    expect(gamesList.body).toHaveLength(1);
   });
 });

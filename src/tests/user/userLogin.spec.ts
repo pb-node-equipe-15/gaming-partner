@@ -30,7 +30,7 @@ describe("Login an user", () => {
   test("POST /login -> Não deve ser capaz de fazer login de usuário inexistente", async () => {
     const userLogin = await request(app).post("/login").send(mockedNotAdmLogin);
 
-    expect(userLogin.status).toBe(404);
+    expect(userLogin.status).toBe(403);
     expect(userLogin.body).toHaveProperty("message");
   });
 });

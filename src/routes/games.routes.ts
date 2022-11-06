@@ -1,19 +1,36 @@
 import { Router } from "express";
-import { createGameController } from "../controllers/games.controller";
-import ensureAuthMiddleware from "../middlewares/ensureAuth.middleware";
-import verifyAdmMiddleware from "../middlewares/verifyAdm.middleware";
+
+import {
+  createGameController,
+  deleteGameController,
+  listGamesController,
+  unsubscribeGameController,
+  updateGameController,
+} from "../controllers/games.controller";
+import adminMiddleware from "../middlewares/admin.midleware";
+import { authMiddleware } from "../middlewares/auth.midleware";
 
 const gamesRouter = Router();
 
-gamesRouter.post(
-  "",
-  ensureAuthMiddleware,
-  verifyAdmMiddleware,
-  createGameController
+gamesRouter.post("", authMiddleware, adminMiddleware, createGameController);
+gamesRouter.get("", authMiddleware, listGamesController);
+gamesRouter.patch(
+  "/:id",
+  authMiddleware,
+  adminMiddleware,
+  updateGameController
 );
-gamesRouter.get("");
-gamesRouter.patch("/:id");
-gamesRouter.delete("/games/:idUser");
+gamesRouter.patch(
+  "/unsubscribe/:id",
+  authMiddleware,
+  unsubscribeGameController
+);
+gamesRouter.delete(
+  "/:id",
+  authMiddleware,
+  adminMiddleware,
+  deleteGameController
+);
 gamesRouter.get("/:id/games");
 
 export default gamesRouter;
