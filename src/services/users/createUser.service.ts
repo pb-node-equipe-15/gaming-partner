@@ -22,6 +22,10 @@ const createUserService = async ({
     throw new AppError("Email already in use", 403);
   }
 
+  if (emailAlreadyExists) {
+    throw new AppError("Email already in use", 403);
+  }
+
   const hashedPassword = await hash(password, 10);
 
   const user = usersRepository.create({
