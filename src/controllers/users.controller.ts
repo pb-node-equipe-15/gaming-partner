@@ -26,7 +26,7 @@ const updateUserController = async (req: Request, res: Response) => {
 const deleteUserController = async (req: Request, res: Response) => {
   const id: string = req.params.id;
   await deleteUserService(id);
-  return res.status(204).json({ message: "User deleted with success!" });
+  return res.status(201).json({ message: "User deleted with success!" });
 };
 
 const searchUserController = async (req: Request, res: Response) => {
@@ -42,7 +42,7 @@ const listUserController = async (req: Request, res: Response) => {
 
 const addGamesUser = async (req: Request, res: Response) => {
   const idUser: string = req.users.id;
-  const idGame: string = req.body.games;
+  const idGame: string = req.body.gamesId;
   addGamesUserService(idGame, idUser);
   return res.status(201).json({ message: "Games add" });
 };

@@ -11,7 +11,7 @@ class UsersGames {
   @ManyToOne(() => Users)
   users: Users;
 
-  @ManyToOne(() => Games)
+  @ManyToOne(() => Games, { eager: true })
   games: Games;
 }
 

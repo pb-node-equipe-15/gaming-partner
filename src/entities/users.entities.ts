@@ -41,7 +41,9 @@ class Users {
   @UpdateDateColumn()
   updateAt: Date;
 
-  @OneToMany(() => UsersGames, (usersGames) => usersGames.users)
+  @OneToMany(() => UsersGames, (usersGames) => usersGames.users, {
+    eager: true,
+  })
   games: UsersGames[];
 
   @OneToMany(() => Conections, (conections) => conections.user)
