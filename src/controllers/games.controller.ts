@@ -28,7 +28,7 @@ const updateGameController = async (req: Request, res: Response) => {
 const deleteGameController = async (req: Request, res: Response) => {
   const id: string = req.params.id;
   const game = await deleteGameService(id);
-  return res.status(200).json(`${game.name} has been deleted`);
+  return res.status(200).json({ message: `${game.name} has been deleted` });
 };
 
 const unsubscribeGameController = async (req: Request, res: Response) => {

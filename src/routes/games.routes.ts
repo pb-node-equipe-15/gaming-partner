@@ -14,19 +14,9 @@ const gamesRouter = Router();
 
 gamesRouter.post("", authMiddleware, adminMiddleware, createGameController);
 gamesRouter.get("", authMiddleware, listGamesController);
-gamesRouter.patch(
-  "/:id",
-  authMiddleware,
-  adminMiddleware,
-  updateGameController
-);
+gamesRouter.patch("/:id", authMiddleware, adminMiddleware, updateGameController);
 gamesRouter.patch("/remove/:id", authMiddleware, unsubscribeGameController);
-gamesRouter.delete(
-  "/:id",
-  authMiddleware,
-  adminMiddleware,
-  deleteGameController
-);
+gamesRouter.delete("/:id", authMiddleware, adminMiddleware, deleteGameController);
 gamesRouter.get("/:id/games");
 
 export default gamesRouter;

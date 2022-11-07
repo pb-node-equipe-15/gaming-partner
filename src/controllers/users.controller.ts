@@ -20,7 +20,7 @@ const updateUserController = async (req: Request, res: Response) => {
   const id: string = req.params.id;
   const token = req.users.id;
   const updatedUser = await updateUserService(user, id, token);
-  return res.status(201).json(updatedUser);
+  return res.status(201).json(instanceToPlain(updatedUser));
 };
 
 const deleteUserController = async (req: Request, res: Response) => {
@@ -32,12 +32,12 @@ const deleteUserController = async (req: Request, res: Response) => {
 const searchUserController = async (req: Request, res: Response) => {
   const id: string = req.params.id;
   const user = await searchUserService(id);
-  return res.status(201).json(instanceToPlain(user));
+  return res.status(200).json(instanceToPlain(user));
 };
 
 const listUserController = async (req: Request, res: Response) => {
   const users = await listUserService();
-  return res.status(201).json(instanceToPlain(users));
+  return res.status(200).json(instanceToPlain(users));
 };
 
 const addGamesUser = async (req: Request, res: Response) => {
