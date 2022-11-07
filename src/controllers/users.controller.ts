@@ -1,13 +1,13 @@
-import { instanceToPlain } from 'class-transformer';
-import { Request, Response } from 'express';
+import { instanceToPlain } from "class-transformer";
+import { Request, Response } from "express";
 
-import { IUserCreate, IUserUpdateRequest } from '../interfaces';
-import addGamesUserService from '../services/users/addGamesUser.service';
-import createUserService from '../services/users/createUser.service';
-import deleteUserService from '../services/users/deleteUser.service';
-import listUserService from '../services/users/listUser.service';
-import searchUserService from '../services/users/searchUser.service';
-import updateUserService from '../services/users/updateUser.service';
+import { IUserCreate, IUserUpdateRequest } from "../interfaces";
+import addGamesUserService from "../services/users/addGamesUser.service";
+import createUserService from "../services/users/createUser.service";
+import deleteUserService from "../services/users/deleteUser.service";
+import listUserService from "../services/users/listUser.service";
+import searchUserService from "../services/users/searchUser.service";
+import updateUserService from "../services/users/updateUser.service";
 
 const createUserController = async (req: Request, res: Response) => {
   const user: IUserCreate = req.body;
@@ -26,7 +26,7 @@ const updateUserController = async (req: Request, res: Response) => {
 const deleteUserController = async (req: Request, res: Response) => {
   const id: string = req.params.id;
   await deleteUserService(id);
-  return res.status(201).json({ message: 'User deleted with success!' });
+  return res.status(201).json({ message: "User deleted with success!" });
 };
 
 const searchUserController = async (req: Request, res: Response) => {
@@ -42,9 +42,16 @@ const listUserController = async (req: Request, res: Response) => {
 
 const addGamesUser = async (req: Request, res: Response) => {
   const idUser: string = req.users.id;
-  const idGame: string = req.body.games;
+  const idGame: string = req.body.gamesId;
   addGamesUserService(idGame, idUser);
-  return res.status(201).json({ message: 'Games add' });
+  return res.status(201).json({ message: "Games add" });
 };
 
-export { createUserController, deleteUserController, listUserController, searchUserController, addGamesUser, updateUserController};
+export {
+  createUserController,
+  deleteUserController,
+  listUserController,
+  searchUserController,
+  addGamesUser,
+  updateUserController,
+};

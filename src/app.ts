@@ -1,3 +1,4 @@
+import "express-async-errors";
 import express from "express";
 import "reflect-metadata";
 import handleErrorMiddleware from "./middlewares/handleError.middleware";
