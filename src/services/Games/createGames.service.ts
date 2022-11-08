@@ -2,6 +2,7 @@ import { IGamerCreate } from "../../interfaces";
 import Games from "../../entities/games.intities";
 import AppDataSource from "../../data-source";
 import AppError from "../../errors/AppError";
+import Categories from "../../entities/categories.entities";
 
 const createGameService = async ({
   name,

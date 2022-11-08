@@ -1,10 +1,10 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-import Users from './users.entities';
+import Users from "./users.entities";
 
-@Entity('conections')
+@Entity("conections")
 class Conections {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   readonly id: String;
 
   @ManyToOne(() => Users)
