@@ -15,6 +15,8 @@ const addCategoryService = async (name: string): Promise<Categories> => {
 
   await categoriesRespository.save(category);
 
+  console.log(category);
+
   return category;
 };
 
