@@ -26,6 +26,10 @@ const seachUsersGameService = async (idGame: string): Promise<UsersGames[]> => {
     },
   });
 
+  if (!usersGame) {
+    throw new AppError("there are no registered registered in this game", 404);
+  }
+
   return usersGame;
 };
 
