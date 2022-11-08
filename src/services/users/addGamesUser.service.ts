@@ -12,13 +12,17 @@ const addGamesUserService = async (
   const gamesRepository = AppDataSource.getRepository(Games);
   const userGameRepository = AppDataSource.getRepository(UsersGames);
 
-  console.log(IdGames);
-
   const users = await userRepository.findOneBy({ id: idUser });
   const games = await gamesRepository.findOneBy({ id: IdGames });
 
   if (!games || !users) {
     throw new AppError("Game not found", 400);
+  }
+
+  const valid = users?.games.find((element) => element.games.id === IdGames);
+
+  if (valid) {
+    throw new AppError("Game already found in your list", 400);
   }
 
   await userGameRepository.save({

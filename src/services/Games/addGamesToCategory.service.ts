@@ -6,7 +6,7 @@ import AppError from "../../errors/AppError";
 const addGameToCategoryService = async (
   id: string,
   idCategory: string
-): Promise<Categories> => {
+): Promise<string> => {
   if (!idCategory || !id) {
     throw new AppError("All the field are required", 400);
   }
@@ -30,7 +30,7 @@ const addGameToCategoryService = async (
     categories: categoryGame,
   });
 
-  return categoryGame;
+  return games.name;
 };
 
 export default addGameToCategoryService;
