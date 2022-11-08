@@ -7,6 +7,7 @@ import deleteGameService from "../services/Games/deleteGame.service";
 import listGamesService from "../services/Games/listGames.service";
 import updateGameService from "../services/Games/updateGame.service";
 import unsubscribeGameService from "../services/Games/unsubscribeGame.service";
+import seachUsersGameService from "../services/Games/seachUsersGame.service";
 
 const createGameController = async (req: Request, res: Response) => {
   const game: IGamerCreate = req.body;
@@ -38,10 +39,19 @@ const unsubscribeGameController = async (req: Request, res: Response) => {
   return res.status(201).json({ message: "successfully unsubscribed" });
 };
 
+const seachUsersGameController = async (req: Request, res: Response) => {
+  const idGame = req.params.id;
+
+  const players = await seachUsersGameService(idGame);
+
+  return res.status(200).json(players);
+};
+
 export {
   createGameController,
   listGamesController,
   deleteGameController,
   unsubscribeGameController,
   updateGameController,
+  seachUsersGameController,
 };
