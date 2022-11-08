@@ -7,11 +7,12 @@ const addGameToCategoryService = async (
   id: string,
   idCategory: string
 ): Promise<Categories> => {
+  const gamesRepository = AppDataSource.getRepository(Games);
+  const games = await gamesRepository.findOneBy({ id });
+
   if (!idCategory || !id) {
     throw new AppError("All the field are required", 400);
   }
-  const gamesRepository = AppDataSource.getRepository(Games);
-  const games = await gamesRepository.findOneBy({ id });
 
   if (!games) {
     throw new AppError("Game not found", 404);

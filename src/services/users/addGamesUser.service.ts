@@ -12,8 +12,6 @@ const addGamesUserService = async (
   const gamesRepository = AppDataSource.getRepository(Games);
   const userGameRepository = AppDataSource.getRepository(UsersGames);
 
-  console.log(IdGames);
-
   const users = await userRepository.findOneBy({ id: idUser });
   const games = await gamesRepository.findOneBy({ id: IdGames });
 

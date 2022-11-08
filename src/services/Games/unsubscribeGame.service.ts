@@ -8,9 +8,9 @@ const unsubscribeGameService = async (
   idUser: string
 ): Promise<void> => {
   const usersRepository = AppDataSource.getRepository(Users);
-  const user = await usersRepository.findOneBy({ id: idUser });
-
   const userGameRepository = AppDataSource.getRepository(UsersGames);
+
+  const user = await usersRepository.findOneBy({ id: idUser });
 
   const valid = user?.games.find((element) => element.games.id === id);
 
