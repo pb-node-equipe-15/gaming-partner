@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 
 import { IUserCreate, IUserUpdateRequest } from "../interfaces";
 import addGamesUserService from "../services/users/addGamesUser.service";
+import conectUserService from "../services/users/conectUser.service";
 import createUserService from "../services/users/createUser.service";
 import deleteUserService from "../services/users/deleteUser.service";
 import listUserService from "../services/users/listUser.service";
@@ -47,6 +48,15 @@ const addGamesUser = async (req: Request, res: Response) => {
   return res.status(201).json({ message: "Games add" });
 };
 
+const conectUsercontroller = async (req: Request, res: Response) => {
+  const id: string = req.users.id;
+  const idUser: string = req.body.id;
+  const newFriend = await conectUserService(id, idUser);
+  return res
+    .status(201)
+    .json({ message: `${newFriend} is now in your friend list` });
+};
+
 export {
   createUserController,
   deleteUserController,
@@ -54,4 +64,5 @@ export {
   searchUserController,
   addGamesUser,
   updateUserController,
+  conectUsercontroller,
 };

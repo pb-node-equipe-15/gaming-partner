@@ -46,8 +46,8 @@ class Users {
   })
   games: UsersGames[];
 
-  @OneToMany(() => Conections, (conections) => conections.user)
-  user: Conections[];
+  @OneToMany(() => Conections, (conections) => conections.user, { eager: true })
+  conections: Conections[];
 }
 
 export default Users;
