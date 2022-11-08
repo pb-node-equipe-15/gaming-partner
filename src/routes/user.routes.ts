@@ -2,6 +2,7 @@ import { Router } from "express";
 import AppError from "../errors/AppError";
 import {
   addGamesUser,
+  conectUsercontroller,
   createUserController,
   deleteUserController,
   listUserController,
@@ -15,6 +16,7 @@ const userRouter = Router();
 
 userRouter.post("", createUserController);
 userRouter.post("/add", authMiddleware, addGamesUser);
+userRouter.post("/conect", authMiddleware, conectUsercontroller);
 userRouter.get("", authMiddleware, adminMiddleware, listUserController);
 userRouter.get("/:id", authMiddleware, searchUserController);
 userRouter.get("/:id/games");

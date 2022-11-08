@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 
 import { IUserCreate, IUserUpdateRequest } from "../interfaces";
 import addGamesUserService from "../services/users/addGamesUser.service";
+import conectUserService from "../services/users/conectUser.service";
 import createUserService from "../services/users/createUser.service";
 import deleteUserService from "../services/users/deleteUser.service";
 import listUserService from "../services/users/listUser.service";
@@ -26,7 +27,7 @@ const updateUserController = async (req: Request, res: Response) => {
 const deleteUserController = async (req: Request, res: Response) => {
   const id: string = req.params.id;
   await deleteUserService(id);
-  return res.status(204).json({ message: "User deleted with success!" });
+  return res.status(201).json({ message: "User deleted with success!" });
 };
 
 const searchUserController = async (req: Request, res: Response) => {
@@ -42,9 +43,18 @@ const listUserController = async (req: Request, res: Response) => {
 
 const addGamesUser = async (req: Request, res: Response) => {
   const idUser: string = req.users.id;
-  const idGame: string = req.body.games;
+  const idGame: string = req.body.gamesId;
   addGamesUserService(idGame, idUser);
   return res.status(201).json({ message: "Games add" });
+};
+
+const conectUsercontroller = async (req: Request, res: Response) => {
+  const id: string = req.users.id;
+  const idUser: string = req.body.id;
+  const newFriend = await conectUserService(id, idUser);
+  return res
+    .status(201)
+    .json({ message: `${newFriend} is now in your friend list` });
 };
 
 export {
@@ -54,4 +64,5 @@ export {
   searchUserController,
   addGamesUser,
   updateUserController,
+  conectUsercontroller,
 };
