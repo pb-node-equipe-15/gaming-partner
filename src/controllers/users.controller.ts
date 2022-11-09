@@ -38,7 +38,8 @@ const searchUserController = async (req: Request, res: Response) => {
 };
 
 const listUserController = async (req: Request, res: Response) => {
-  const users = await listUserService();
+  const adm: boolean = req.users.isAdm;
+  const users = await listUserService(adm);
   return res.status(200).json(instanceToPlain(users));
 };
 

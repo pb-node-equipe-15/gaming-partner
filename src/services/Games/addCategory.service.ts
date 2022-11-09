@@ -14,6 +14,12 @@ const addCategoryService = async (name: string): Promise<Categories> => {
     throw new AppError("Category already exists", 409);
   }
 
+  const valid = await categoriesRespository.findOneBy({ name });
+
+  if (valid) {
+    throw new AppError("category alredy exist", 409);
+  }
+
   const category = categoriesRespository.create({
     name,
   });
