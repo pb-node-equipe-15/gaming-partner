@@ -1,4 +1,4 @@
-import { Exclude } from 'class-transformer';
+import { Exclude } from "class-transformer";
 import {
   Column,
   CreateDateColumn,
@@ -6,14 +6,14 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-import Conections from './conections.entities';
-import UsersGames from './usersGames.entities';
+import Conections from "./conections.entities";
+import UsersGames from "./usersGames.entities";
 
-@Entity('users')
+@Entity("users")
 class Users {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
   @Column({ length: 255 })
@@ -41,11 +41,13 @@ class Users {
   @UpdateDateColumn()
   updateAt: Date;
 
-  @OneToMany(() => UsersGames, (usersGames) => usersGames.users)
+  @OneToMany(() => UsersGames, (usersGames) => usersGames.users, {
+    eager: true,
+  })
   games: UsersGames[];
 
-  @OneToMany(() => Conections, (conections) => conections.user)
-  user: Conections[];
+  @OneToMany(() => Conections, (conections) => conections.user, { eager: true })
+  conections: Conections[];
 }
 
 export default Users;

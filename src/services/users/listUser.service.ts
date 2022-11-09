@@ -1,9 +1,13 @@
-import AppDataSource from '../../data-source';
-import Users from '../../entities/users.entities';
+import AppDataSource from "../../data-source";
+import Users from "../../entities/users.entities";
 
-const listUserService = async (): Promise<Users[]> => {
+const listUserService = async (adm: boolean): Promise<Users[]> => {
   const usersRepository = AppDataSource.getRepository(Users);
-  const users = await usersRepository.find();
+  let users = await usersRepository.find();
+
+  if (adm === false) {
+    users = users.filter((element) => element.availability === true);
+  }
   return users;
 };
 

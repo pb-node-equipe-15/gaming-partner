@@ -1,28 +1,24 @@
-import AppDataSource from '../../data-source';
-import Games from '../../entities/games.intities';
-import Users from '../../entities/users.entities';
-import AppError from '../../errors/AppError';
+import AppDataSource from "../../data-source";
+import Users from "../../entities/users.entities";
+import UsersGames from "../../entities/usersGames.entities";
+import AppError from "../../errors/AppError";
 
-const unsubscribeGameService = async ( id: string, idUser: string): Promise<void> => {
-  const gamesRepository = AppDataSource.getRepository(Games);
-  const game = await gamesRepository.findOneBy({ id });
-
+const unsubscribeGameService = async (
+  id: string,
+  idUser: string
+): Promise<void> => {
   const usersRepository = AppDataSource.getRepository(Users);
+  const userGameRepository = AppDataSource.getRepository(UsersGames);
+
   const user = await usersRepository.findOneBy({ id: idUser });
 
-  if (!game) {
-    throw new AppError('game not found', 400);
-  }
-
-  const valid = game.usersGames.find((element) => element.users === user);
+  const valid = user?.games.find((element) => element.games.id === id);
 
   if (!valid) {
-    throw new AppError('User inscription was not found in this game', 400);
+    throw new AppError("User inscription was not found in this game", 400);
   }
 
-  game.usersGames.filter((element) => element.users !== user);
-
-  await gamesRepository.save(game);
+  await userGameRepository.delete({ id: valid.id });
 };
 
 export default unsubscribeGameService;
