@@ -35,6 +35,7 @@ To clone and run this application, you'll need [git](https://git-scm.com), [npm]
 <br/>Node version used in this project: `16.17.0`
 <br/>From your command line:
 
+- [Documentation](https://documentation-one-red.vercel.app)
 ```bash
 # Clone the repository
 $ git clone https://github.com/pb-node-equipe-15/gaming-partner
