@@ -28,7 +28,7 @@ const updateUserController = async (req: Request, res: Response) => {
 const deleteUserController = async (req: Request, res: Response) => {
   const id: string = req.params.id;
   await deleteUserService(id);
-  return res.status(201).json({ message: "User deleted with success!" });
+  return res.status(200).json({ message: "User deleted with success!" });
 };
 
 const searchUserController = async (req: Request, res: Response) => {
@@ -38,7 +38,8 @@ const searchUserController = async (req: Request, res: Response) => {
 };
 
 const listUserController = async (req: Request, res: Response) => {
-  const users = await listUserService();
+  const adm: boolean = req.users.isAdm;
+  const users = await listUserService(adm);
   return res.status(200).json(instanceToPlain(users));
 };
 
