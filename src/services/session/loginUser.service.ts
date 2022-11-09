@@ -26,6 +26,10 @@ const createSessionService = async ({
     throw new AppError("Invalid email or password", 403);
   }
 
+  await userRepository.update(user.id, {
+    availability: true,
+  });
+
   const token = jwt.sign(
     {
       isAdm: user.isAdm,
