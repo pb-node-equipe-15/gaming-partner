@@ -4,9 +4,14 @@ import AppError from "../../errors/AppError";
 
 const addCategoryService = async (name: string): Promise<Categories> => {
   const categoriesRespository = AppDataSource.getRepository(Categories);
+  const categories = await categoriesRespository.findOneBy({ name: name });
 
   if (!name) {
-    throw new AppError("Name field is empty", 400);
+    throw new AppError("Name field is empty");
+  }
+
+  if (categories) {
+    throw new AppError("Category already exists", 409);
   }
 
   const valid = await categoriesRespository.findOneBy({ name });
@@ -20,8 +25,6 @@ const addCategoryService = async (name: string): Promise<Categories> => {
   });
 
   await categoriesRespository.save(category);
-
-  console.log(category);
 
   return category;
 };

@@ -16,7 +16,7 @@ const addGamesUserService = async (
   const games = await gamesRepository.findOneBy({ id: IdGames });
 
   if (!games || !users) {
-    throw new AppError("Game not found", 400);
+    throw new AppError("Game not found");
   }
 
   const valid = users?.games.find((element) => element.games.id === IdGames);

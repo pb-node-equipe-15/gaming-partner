@@ -7,6 +7,7 @@ import {
   mockedNotAdmLogin,
   mockedNotAdmUser,
   mockedUser,
+  mockedUserUpdate,
 } from "../mocks";
 
 describe("List all users", () => {
@@ -18,6 +19,9 @@ describe("List all users", () => {
       .catch((err) => {
         console.error(err);
       });
+    await request(app).post("/users").send(mockedNotAdmUser);
+    await request(app).post("/users").send(mockedUser);
+    await request(app).post("/users").send(mockedUserUpdate);
   });
 
   afterAll(async () => {
@@ -25,7 +29,6 @@ describe("List all users", () => {
   });
 
   test("GET /users -> Deve listar todos os usuários", async () => {
-    await request(app).post("/users").send(mockedUser);
     const userLogin = await request(app).post("/login").send(mockedAdmLogin);
 
     const userList = await request(app)
@@ -33,18 +36,21 @@ describe("List all users", () => {
       .set("Authorization", `Bearer ${userLogin.body.token}`);
 
     expect(userList.status).toBe(200);
-    expect(userList.body).toHaveLength(1);
+    expect(userList.body).toHaveLength(3);
   });
 
-  test("GET /users -> Não deve ser capaz de listar os usuários, se não for administrador", async () => {
-    await request(app).post("/users").send(mockedNotAdmUser);
-    const userLogin = await request(app).post("/login").send(mockedNotAdmLogin);
+  test("GET /users -> Se não for administrador, deve listar somente usuários disponíveis ", async () => {
+    const userLoginNotAdm = await request(app)
+      .post("/login")
+      .send(mockedNotAdmLogin);
+    await request(app).post("/login").send(mockedAdmLogin);
 
     const userList = await request(app)
       .get("/users")
-      .set("Authorization", `Bearer ${userLogin.body.token}`);
+      .set("Authorization", `Bearer ${userLoginNotAdm.body.token}`);
 
-    expect(userList.status).toBe(403);
-    expect(userList.body).toHaveProperty("message");
+    expect(userList.status).toBe(200);
+    expect(userList.body).toHaveLength(2);
+    expect(userList.body[1].availability).toBe(true);
   });
 });
