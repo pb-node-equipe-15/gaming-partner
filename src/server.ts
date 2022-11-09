@@ -1,10 +1,9 @@
 import app from "./app";
 import AppDataSource from "./data-source";
-import "dotenv/config";
+import 'dotenv/config'
 
 (async () => {
-  const PORT = process.env.PORT;
-
+  
   await AppDataSource.initialize()
     .then(() => {
       console.log("Database connected");
@@ -14,6 +13,6 @@ import "dotenv/config";
     });
 
   app.listen(process.env.PORT || 3000, () => {
-    console.log(`Serve running on port ${PORT}`);
+    console.log(`Serve running`);
   });
 })();

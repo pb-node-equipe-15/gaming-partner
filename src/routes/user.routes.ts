@@ -5,6 +5,7 @@ import {
   conectUsercontroller,
   createUserController,
   deleteUserController,
+  desconectUsercontroller,
   listUserController,
   searchUserController,
   updateUserController,
@@ -17,6 +18,7 @@ const userRouter = Router();
 userRouter.post("", createUserController);
 userRouter.post("/add", authMiddleware, addGamesUser);
 userRouter.post("/conect", authMiddleware, conectUsercontroller);
+userRouter.post("/desconect", authMiddleware, desconectUsercontroller);
 userRouter.get("", authMiddleware, adminMiddleware, listUserController);
 userRouter.get("/:id", authMiddleware, searchUserController);
 userRouter.get("/:id/games");

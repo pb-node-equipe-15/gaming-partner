@@ -6,7 +6,7 @@ import AppError from "../../errors/AppError";
 const addGameToCategoryService = async (
   id: string,
   idCategory: string
-): Promise<Categories> => {
+): Promise<string> => {
   const gamesRepository = AppDataSource.getRepository(Games);
   const games = await gamesRepository.findOneBy({ id });
 
@@ -31,7 +31,7 @@ const addGameToCategoryService = async (
     categories: categoryGame,
   });
 
-  return categoryGame;
+  return games.name;
 };
 
 export default addGameToCategoryService;

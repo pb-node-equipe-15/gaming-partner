@@ -46,9 +46,7 @@ describe("Add an category in game", () => {
       .set("Authorization", `Bearer ${userLogin.body.token}`);
 
     expect(addCategoryGames.status).toBe(201);
-    expect(addCategoryGames.body).toHaveProperty("id");
-    expect(addCategoryGames.body).toHaveProperty("name");
-    expect(addCategoryGames.body).toHaveProperty("games");
+    expect(addCategoryGames.body).toHaveProperty("message");
   });
 
   test("POST  /categories/:id -> Não deve ser capaz de adicionar uma categoria a um jogo, se não for administrado", async () => {
@@ -72,6 +70,25 @@ describe("Add an category in game", () => {
       .set("Authorization", `Bearer ${userLoginNotAdm.body.token}`);
 
     expect(addCategoryGames.status).toBe(403);
+    expect(addCategoryGames.body).toHaveProperty("message");
+  });
+
+  test("POST  /categories/:id -> Não deve ser capaz de adicionar uma categoria a um jogo, se o jogo já estiver nessa categoria", async () => {
+    const userLogin = await request(app).post("/login").send(mockedAdmLogin);
+    const gameList = await request(app)
+      .get("/games")
+      .set("Authorization", `Bearer ${userLogin.body.token}`);
+
+    const categoryList = await request(app)
+      .get("/categories")
+      .set("Authorization", `Bearer ${userLogin.body.token}`);
+
+    const addCategoryGames = await request(app)
+      .post(`/categories/${categoryList.body[0].id}`)
+      .send({ game: `${gameList.body[0].id}` })
+      .set("Authorization", `Bearer ${userLogin.body.token}`);
+
+    expect(addCategoryGames.status).toBe(409);
     expect(addCategoryGames.body).toHaveProperty("message");
   });
 });

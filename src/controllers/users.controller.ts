@@ -6,6 +6,7 @@ import addGamesUserService from "../services/users/addGamesUser.service";
 import conectUserService from "../services/users/conectUser.service";
 import createUserService from "../services/users/createUser.service";
 import deleteUserService from "../services/users/deleteUser.service";
+import desconectUserService from "../services/users/desconectUser.service";
 import listUserService from "../services/users/listUser.service";
 import searchUserService from "../services/users/searchUser.service";
 import updateUserService from "../services/users/updateUser.service";
@@ -45,7 +46,7 @@ const addGamesUser = async (req: Request, res: Response) => {
   const idUser: string = req.users.id;
   const idGame: string = req.body.gamesId;
   await addGamesUserService(idGame, idUser);
-  return res.status(201).json({ message: "Games add" });
+  return res.status(201).json({ message: "Game added" });
 };
 
 const conectUsercontroller = async (req: Request, res: Response) => {
@@ -57,6 +58,14 @@ const conectUsercontroller = async (req: Request, res: Response) => {
     .json({ message: `${newFriend} is now in your friend list` });
 };
 
+const desconectUsercontroller = async (req: Request, res: Response) => {
+  const id: string = req.body.id;
+  await desconectUserService(id);
+  return res
+    .status(201)
+    .json({ message: `Friendship was successfully deleted` });
+};
+
 export {
   createUserController,
   deleteUserController,
@@ -65,4 +74,5 @@ export {
   addGamesUser,
   updateUserController,
   conectUsercontroller,
+  desconectUsercontroller,
 };

@@ -14,7 +14,7 @@ const addGamesToCategoryController = async (req: Request, res: Response) => {
   const id: string = req.body.game;
   const idCategory: string = req.params.id;
   const result = await addGameToCategoryService(id, idCategory);
-  return res.status(201).json(result);
+  return res.status(201).json({ message: `${result} was successfully added` });
 };
 
 const listCategoriesController = async (req: Request, res: Response) => {

@@ -4,6 +4,7 @@ import {
   createGameController,
   deleteGameController,
   listGamesController,
+  seachUsersGameController,
   unsubscribeGameController,
   updateGameController,
 } from "../controllers/games.controller";
@@ -29,6 +30,7 @@ gamesRouter.delete(
   deleteGameController
 );
 gamesRouter.get("/:id/games");
+gamesRouter.get("/:id/users", authMiddleware, seachUsersGameController);
 
 gamesRouter.get("/error", async (req, res) => {
   throw new AppError("Debug error route", 500);

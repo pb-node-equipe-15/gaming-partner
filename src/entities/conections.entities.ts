@@ -5,7 +5,7 @@ import Users from "./users.entities";
 @Entity("conections")
 class Conections {
   @PrimaryGeneratedColumn("uuid")
-  readonly id: String;
+  readonly id: string;
 
   @ManyToOne(() => Users)
   user: Users;
