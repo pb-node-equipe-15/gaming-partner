@@ -35,7 +35,8 @@ describe("/users", () => {
       .delete(`/users/${user.body.id}`)
       .set("Authorization", `Bearer ${userLogin.body.token}`);
 
-    expect(response.status).toBe(204);
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("message");
   });
 
   test("DELETE /users/:id -  Não deve ser capaz de excluir o usuário com isActive = false", async () => {

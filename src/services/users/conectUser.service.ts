@@ -35,7 +35,7 @@ const conectUserService = async (
   );
 
   if (valid[0]) {
-    throw new AppError("Friend already found in your list", 400);
+    throw new AppError("Friend already found in your list", 409);
   }
 
   await conectionsRespository.save({

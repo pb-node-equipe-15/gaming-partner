@@ -29,7 +29,7 @@ const addGameToCategoryService = async (
   const valid = categoryGame.games.find((element) => element.id === id);
 
   if (valid) {
-    throw new AppError("Game already inscribed in this category", 404);
+    throw new AppError("Game already inscribed in this category", 409);
   }
 
   await gamesRepository.update(id, {
