@@ -1,15 +1,15 @@
-import { instanceToPlain } from "class-transformer";
-import { Request, Response } from "express";
+import { instanceToPlain } from 'class-transformer';
+import { Request, Response } from 'express';
 
-import { IUserCreate, IUserUpdateRequest } from "../interfaces";
-import addGamesUserService from "../services/users/addGamesUser.service";
-import conectUserService from "../services/users/conectUser.service";
-import createUserService from "../services/users/createUser.service";
-import deleteUserService from "../services/users/deleteUser.service";
-import desconectUserService from "../services/users/desconectUser.service";
-import listUserService from "../services/users/listUser.service";
-import searchUserService from "../services/users/searchUser.service";
-import updateUserService from "../services/users/updateUser.service";
+import { IUserCreate, IUserUpdateRequest } from '../interfaces';
+import addGamesUserService from '../services/users/addGamesUser.service';
+import conectUserService from '../services/users/conectUser.service';
+import createUserService from '../services/users/createUser.service';
+import deleteUserService from '../services/users/deleteUser.service';
+import desconectUserService from '../services/users/desconectUser.service';
+import listUserService from '../services/users/listUser.service';
+import searchUserService from '../services/users/searchUser.service';
+import updateUserService from '../services/users/updateUser.service';
 
 const createUserController = async (req: Request, res: Response) => {
   const user: IUserCreate = req.body;
@@ -28,7 +28,7 @@ const updateUserController = async (req: Request, res: Response) => {
 const deleteUserController = async (req: Request, res: Response) => {
   const id: string = req.params.id;
   await deleteUserService(id);
-  return res.status(200).json({ message: "User deleted with success!" });
+  return res.status(200).json({ message: 'User deleted with success!' });
 };
 
 const searchUserController = async (req: Request, res: Response) => {
@@ -47,7 +47,7 @@ const addGamesUser = async (req: Request, res: Response) => {
   const idUser: string = req.users.id;
   const idGame: string = req.body.gamesId;
   await addGamesUserService(idGame, idUser);
-  return res.status(201).json({ message: "Game added" });
+  return res.status(201).json({ message: 'Game added' });
 };
 
 const conectUsercontroller = async (req: Request, res: Response) => {

@@ -1,7 +1,7 @@
-import AppDataSource from "../../data-source";
-import Users from "../../entities/users.entities";
-import UsersGames from "../../entities/usersGames.entities";
-import AppError from "../../errors/AppError";
+import AppDataSource from '../../data-source';
+import Users from '../../entities/users.entities';
+import UsersGames from '../../entities/usersGames.entities';
+import AppError from '../../errors/AppError';
 
 const unsubscribeGameService = async (
   id: string,
@@ -15,7 +15,7 @@ const unsubscribeGameService = async (
   const valid = user?.games.find((element) => element.games.id === id);
 
   if (!valid) {
-    throw new AppError("User inscription was not found in this game", 400);
+    throw new AppError('User inscription was not found in this game', 400);
   }
 
   await userGameRepository.delete({ id: valid.id });

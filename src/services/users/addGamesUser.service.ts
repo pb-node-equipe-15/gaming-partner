@@ -1,13 +1,10 @@
-import AppDataSource from "../../data-source";
-import Games from "../../entities/games.intities";
-import Users from "../../entities/users.entities";
-import UsersGames from "../../entities/usersGames.entities";
-import AppError from "../../errors/AppError";
+import AppDataSource from '../../data-source';
+import Games from '../../entities/games.intities';
+import Users from '../../entities/users.entities';
+import UsersGames from '../../entities/usersGames.entities';
+import AppError from '../../errors/AppError';
 
-const addGamesUserService = async (
-  IdGames: string,
-  idUser: string
-): Promise<void> => {
+const addGamesUserService = async (IdGames: string, idUser: string): Promise<void> => {
   const userRepository = AppDataSource.getRepository(Users);
   const gamesRepository = AppDataSource.getRepository(Games);
   const userGameRepository = AppDataSource.getRepository(UsersGames);
@@ -16,13 +13,13 @@ const addGamesUserService = async (
   const games = await gamesRepository.findOneBy({ id: IdGames });
 
   if (!games || !users) {
-    throw new AppError("Game not found");
+    throw new AppError('Game not found');
   }
 
   const valid = users?.games.find((element) => element.games.id === IdGames);
 
   if (valid) {
-    throw new AppError("Game already found in your list", 409);
+    throw new AppError('Game already found in your list', 409);
   }
 
   await userGameRepository.save({

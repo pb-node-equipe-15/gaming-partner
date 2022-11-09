@@ -1,8 +1,8 @@
-import { instanceToPlain } from "class-transformer";
-import { Request, Response } from "express";
-import addCategoryService from "../services/Games/addCategory.service";
-import addGameToCategoryService from "../services/Games/addGamesToCategory.service";
-import listCategoriesService from "../services/Games/listCategories.service";
+import { instanceToPlain } from 'class-transformer';
+import { Request, Response } from 'express';
+import addCategoryService from '../services/Games/addCategory.service';
+import addGameToCategoryService from '../services/Games/addGamesToCategory.service';
+import listCategoriesService from '../services/Games/listCategories.service';
 
 const addCategoryController = async (req: Request, res: Response) => {
   const name: string = req.body.name;

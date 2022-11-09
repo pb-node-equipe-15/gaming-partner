@@ -1,7 +1,7 @@
-import AppDataSource from "../../data-source";
-import Games from "../../entities/games.intities";
-import UsersGames from "../../entities/usersGames.entities";
-import AppError from "../../errors/AppError";
+import AppDataSource from '../../data-source';
+import Games from '../../entities/games.intities';
+import UsersGames from '../../entities/usersGames.entities';
+import AppError from '../../errors/AppError';
 
 const seachUsersGameService = async (idGame: string): Promise<UsersGames[]> => {
   const usersGameRepository = AppDataSource.getRepository(UsersGames);
@@ -12,7 +12,7 @@ const seachUsersGameService = async (idGame: string): Promise<UsersGames[]> => {
   });
 
   if (!game) {
-    throw new AppError("Game not found", 404);
+    throw new AppError('Game not found', 404);
   }
 
   const usersGame = await usersGameRepository.find({
@@ -27,7 +27,7 @@ const seachUsersGameService = async (idGame: string): Promise<UsersGames[]> => {
   });
 
   if (!usersGame) {
-    throw new AppError("there are no registered registered in this game", 404);
+    throw new AppError('there are no registered registered in this game', 404);
   }
 
   return usersGame;

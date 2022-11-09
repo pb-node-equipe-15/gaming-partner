@@ -1,13 +1,13 @@
-import { instanceToPlain } from "class-transformer";
-import { Request, Response } from "express";
+import { instanceToPlain } from 'class-transformer';
+import { Request, Response } from 'express';
 
-import { IGamerCreate, IUpdateGame } from "../interfaces";
-import createGameService from "../services/Games/createGames.service";
-import deleteGameService from "../services/Games/deleteGame.service";
-import listGamesService from "../services/Games/listGames.service";
-import updateGameService from "../services/Games/updateGame.service";
-import unsubscribeGameService from "../services/Games/unsubscribeGame.service";
-import seachUsersGameService from "../services/Games/seachUsersGame.service";
+import { IGamerCreate, IUpdateGame } from '../interfaces';
+import createGameService from '../services/Games/createGames.service';
+import deleteGameService from '../services/Games/deleteGame.service';
+import listGamesService from '../services/Games/listGames.service';
+import updateGameService from '../services/Games/updateGame.service';
+import unsubscribeGameService from '../services/Games/unsubscribeGame.service';
+import seachUsersGameService from '../services/Games/seachUsersGame.service';
 
 const createGameController = async (req: Request, res: Response) => {
   const game: IGamerCreate = req.body;
@@ -36,7 +36,7 @@ const unsubscribeGameController = async (req: Request, res: Response) => {
   const id: string = req.params.id;
   const idUser: string = req.users.id;
   await unsubscribeGameService(id, idUser);
-  return res.status(201).json({ message: "successfully unsubscribed" });
+  return res.status(201).json({ message: 'successfully unsubscribed' });
 };
 
 const seachUsersGameController = async (req: Request, res: Response) => {
