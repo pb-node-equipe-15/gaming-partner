@@ -6,7 +6,7 @@ const listUserService = async (adm: boolean): Promise<Users[]> => {
   let users = await usersRepository.find();
 
   if (adm === false) {
-    users = await users.filter((element) => element.availability === true);
+    users = users.filter((element) => element.availability === true);
   }
   return users;
 };
